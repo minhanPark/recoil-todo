@@ -8,24 +8,19 @@ const Todo = ({ text, category, id }: ITodo) => {
     const {
       currentTarget: { name },
     } = event;
-    setTodos((prevToDos) => {
-      return prevToDos.map((toDo) =>
-        toDo.id === id ? { ...toDo, category: name as ITodo["category"] } : toDo
-      );
+    setTodos((oldTodos) => {
+      const todos = oldTodos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            category: name as ITodo["category"],
+          };
+        } else {
+          return todo;
+        }
+      });
+      return todos;
     });
-    // setTodos((oldTodos) => {
-    //   const todos = oldTodos.map((todo) => {
-    //     if (todo.id === id) {
-    //       return {
-    //         ...todo,
-    //         category: name,
-    //       };
-    //     } else {
-    //       return todo;
-    //     }
-    //   });
-    //   return todos;
-    // });
   };
   return (
     <li>
